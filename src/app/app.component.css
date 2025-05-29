@@ -1,0 +1,40 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 240px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+  .main-content {
+    padding: 16px;
+  }
+  
+  .sidenav-container {
+    height: 100vh;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  button[mat-button] {
+    font-weight: bold;
+  }
+  

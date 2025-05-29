@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>About Component</mat-card-title>
+  <mat-card-content [formGroup]="aboutForm">
+
+    <form (ngSubmit)="sendToParent()" autocomplete="off">
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="aboutForm.get('name')?.invalid && aboutForm.get('name')?.touched">
+          <span *ngIf="aboutForm.get('name')?.errors?.['required']">Name is required</span>
+          <span *ngIf="aboutForm.get('name')?.errors?.['minlength']">Minimum 3 characters</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option value="" disabled>Select a role</mat-option>
+          <mat-option *ngFor="let r of roles" [value]="r">{{ r }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="aboutForm.get('role')?.invalid && aboutForm.get('role')?.touched">
+          Role is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="isSubscribed">
+        Subscribe to newsletter
+      </mat-checkbox>
+
+      <div class="margin-top">
+        <button mat-raised-button color="primary" type="submit" [disabled]="aboutForm.invalid">
+          Send Message to Parent
+        </button>
+        <button mat-button color="warn" type="button" (click)="clearForm()">
+          Clear Form
+        </button>
+      </div>
+    </form>
+
+    <p class="margin-top">Message from Parent: {{ messageFromParent }}</p>
+  </mat-card-content>
+</mat-card>

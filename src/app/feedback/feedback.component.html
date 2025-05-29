@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title>Feedback</mat-card-title>
+  <mat-card-content [formGroup]="feedbackForm">
+
+    <form (ngSubmit)="submitFeedback()" autocomplete="off">
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Your Name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched">
+          <span *ngIf="feedbackForm.get('name')?.errors?.['required']">Name is required</span>
+          <span *ngIf="feedbackForm.get('name')?.errors?.['minlength']">Minimum 2 characters</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Your Feedback</mat-label>
+        <textarea matInput formControlName="feedback" rows="4" required></textarea>
+        <mat-error *ngIf="feedbackForm.get('feedback')?.invalid && feedbackForm.get('feedback')?.touched">
+          <span *ngIf="feedbackForm.get('feedback')?.errors?.['required']">Feedback is required</span>
+          <span *ngIf="feedbackForm.get('feedback')?.errors?.['minlength']">Minimum 5 characters</span>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="margin-top">
+        <button mat-raised-button color="primary" type="submit" [disabled]="feedbackForm.invalid">
+          Submit
+        </button>
+        <button mat-button color="warn" type="button" (click)="clearForm()">
+          Clear Form
+        </button>
+      </div>
+
+    </form>
+
+    <p class="margin-top" *ngIf="submitted">
+      ✅ Thank you, {{ feedbackForm.get('name')?.value || 'User' }}! Your feedback was received.
+    </p>
+
+  </mat-card-content>
+</mat-card>

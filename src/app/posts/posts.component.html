@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-card-title>Posts from API</mat-card-title>
+  
+    <mat-tab-group>
+      <!-- Material Table Tab -->
+      <mat-tab label="Material Table">
+        <div style="padding: 16px;">
+  
+          <!-- Search Input -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Search</mat-label>
+            <input matInput [(ngModel)]="searchKey" (keyup)="applyFilter()" placeholder="Search by title or body">
+            <button mat-icon-button matSuffix *ngIf="searchKey" (click)="clearFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+  
+          <!-- MatTable -->
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z2" matSort>
+  
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+              <mat-cell *matCellDef="let post"> {{post.id}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+              <mat-cell *matCellDef="let post"> {{post.title}} </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="body">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Body </mat-header-cell>
+              <mat-cell *matCellDef="let post"> {{post.body}} </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+  
+          <!-- Pagination -->
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-tab>
+  
+      <!-- AG Grid Tab -->
+      <mat-tab label="AG Grid Table">
+        <div style="padding: 16px;">
+          <ag-grid-angular
+            style="width: 100%; height: 400px;"
+            class="ag-theme-alpine"
+            [rowData]="posts"
+            [columnDefs]="agGridColumns"
+            [pagination]="true"
+            [paginationPageSize]="10"
+            [theme]="'legacy'">
+          </ag-grid-angular>
+        </div>
+      </mat-tab>
+  
+      <!-- Additional Tab -->
+      <mat-tab label="A Tab for Science">
+        <div style="padding: 16px;">
+          <h3>This is an experiment</h3>
+          <p>I'm trying to do something.</p>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+  

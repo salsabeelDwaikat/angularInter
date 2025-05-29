@@ -1,0 +1,12 @@
+<h2>Home Component</h2>
+<p>Message from child: {{ messageFromChild }}</p>
+
+<button mat-raised-button color="primary" (click)="sendMessage()">
+  Send Message to Children
+</button>
+
+<ngb-alert type="success" [dismissible]="false">
+  Hello from NG Bootstrap!
+</ngb-alert>
+
+<router-outlet></router-outlet>

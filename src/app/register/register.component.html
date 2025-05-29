@@ -1,0 +1,68 @@
+<div class="register-container">
+    <mat-card class="register-card">
+      <mat-card-title class="register-title">Register</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" />
+            <mat-error *ngIf="username?.invalid && (username?.touched || username?.dirty)">
+              Username is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+            <mat-error *ngIf="email?.errors?.['required'] && (email?.touched || email?.dirty)">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="email?.errors?.['email'] && (email?.touched || email?.dirty)">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="'Toggle password visibility'"
+              [attr.aria-pressed]="!hidePassword"
+              type="button"
+            >
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.errors?.['required'] && (password?.touched || password?.dirty)">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="password?.errors?.['minlength'] && (password?.touched || password?.dirty)">
+              Password must be at least 8 characters
+            </mat-error>
+            <mat-error *ngIf="password?.errors?.['pattern'] && (password?.touched || password?.dirty)">
+              Password must contain uppercase, lowercase, number, and special character
+            </mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" class="full-width" type="submit">
+            Register
+          </button>
+        </form>
+      </mat-card-content>
+  
+      <mat-card-actions class="text-center" style="justify-content: center;">
+        <span>Already have an account? 
+          <button mat-button color="accent" class="link-button" (click)="goToLogin()">Login now!</button>
+        </span>
+      </mat-card-actions>
+      
+    </mat-card>
+  </div>
+  

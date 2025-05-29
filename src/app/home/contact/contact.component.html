@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title>Contact Us</mat-card-title>
+  <mat-card-content [formGroup]="contactForm">
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="contactForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="contactForm.get('email')?.hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" />
+      <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">Phone is required</mat-error>
+      <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">Must be 10 digits</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Message</mat-label>
+      <textarea matInput rows="4" formControlName="message"></textarea>
+      <mat-error *ngIf="contactForm.get('message')?.hasError('required')">Message is required</mat-error>
+      <mat-error *ngIf="contactForm.get('message')?.hasError('minlength')">Min 10 characters</mat-error>
+    </mat-form-field>
+
+    <div class="margin-top">
+      <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="contactForm.invalid">
+        Submit
+      </button>
+      <button mat-button color="warn" type="button" (click)="clearForm()">Clear Form</button>
+    </div>
+
+    <p class="margin-top">Message from Parent: {{ messageFromParent }}</p>
+  </mat-card-content>
+</mat-card>

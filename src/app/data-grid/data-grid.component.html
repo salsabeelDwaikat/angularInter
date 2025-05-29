@@ -1,0 +1,24 @@
+<div class="button-container" style="margin: 10px;">
+  <button mat-raised-button color="primary" (click)="exportToCSV()">Export to CSV</button>
+  <button mat-raised-button color="accent" (click)="showCSVContent()">Show CSV Export Content</button>
+  <button mat-raised-button color="warn" (click)="createCar()">Create Car</button>
+</div>
+
+<ag-grid-angular
+  class="ag-theme-quartz"
+  style="width: 100%; height: 400px;"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  (cellValueChanged)="onCellValueChanged($event)"
+  (gridReady)="onGridReady($event)"
+  [groupDisplayType]="'groupRows'"
+  [animateRows]="true"
+  [rowSelection]="'multiple'"
+>
+</ag-grid-angular>
+
+<div *ngIf="csvPreviewContent" style="margin: 20px;">
+  <h3>CSV Preview:</h3>
+  <pre class="csv-preview">{{ csvPreviewContent }}</pre>
+</div>

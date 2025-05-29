@@ -1,0 +1,32 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px); /* full height minus toolbar */
+    background-color: transparent; /* Make sure container background is transparent */
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  mat-card.register-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  button {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .register-title{
+    padding-bottom: 8px;
+  }
+  

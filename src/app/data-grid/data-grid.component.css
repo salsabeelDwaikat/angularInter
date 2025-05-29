@@ -1,0 +1,46 @@
+.custom-grid-theme {
+  /* Primary colors */
+  --ag-header-background-color: #aa00ff;
+  --ag-header-foreground-color: #ffffff;
+  --ag-header-cell-hover-background-color: #d500f9;
+
+  /* Row colors */
+  --ag-odd-row-background-color: #f3e5f5;
+  --ag-row-hover-color: #e1bee7;
+
+  /* Font & border */
+  --ag-font-family: "Roboto", sans-serif;
+  --ag-border-color: #ce93d8;
+  --ag-row-border-width: 1px;
+}
+
+.custom-grid-theme .ag-header-cell-label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.custom-grid-theme .ag-cell {
+  font-size: 14px;
+}
+.button-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.action-button {
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+.csv-preview {
+  background-color: #8f1515;
+  padding: 12px;
+  border: 1px solid #ccc;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 4px;
+}
