@@ -63,9 +63,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   private checkScreenSize() {
-    this.isScreenSmall = window.innerWidth < 768;
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 768) {
     this.sidenavMode = this.isScreenSmall ? 'over' : 'side';
-  }
+  }}}
 
   toggleSidenav() {
     if (this.sidenav) {

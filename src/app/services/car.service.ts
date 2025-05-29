@@ -21,51 +21,63 @@ export class CarService {
   constructor(private http: HttpClient) {}
 
   getCars(): Observable<Car[]> {
-    const token = localStorage.getItem('authToken');
-
-    if (!token) {
-      console.error('Token not found in localStorage!');
+    if (typeof window === 'undefined') {
+      console.warn('Not in browser: localStorage unavailable');
       return of([]); 
     }
-
+  
+    const token = localStorage.getItem('authToken');
+  
+    if (!token) {
+      console.error('Token not found in localStorage!');
+      return of([]);
+    }
+  
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
+      'ngrok-skip-browser-warning': 'true' 
     });
-console.log("cars serv")
-    return this.http.get<Car[]>(this.baseUrl, { headers });
+  
+    console.log("cars serv");
+    return this.http.get<Car[]>(`${this.baseUrl}/api/cars/`, { headers });
   }
+  
 
   createCar(car: Car): Observable<Car> {
     const token = localStorage.getItem('authToken');
-
+  
     if (!token) {
       console.error('Token not found in localStorage!');
       return of(); 
     }
-
+  
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true' 
     });
-
-    return this.http.post<Car>(this.baseUrl, car, { headers });
+  
+    return this.http.post<Car>(`${this.baseUrl}/api/cars/`, car, { headers });
   }
+  
 
   updateCar(id: number, car: Car): Observable<Car> {
     const token = localStorage.getItem('authToken');
-
+  
     if (!token) {
       console.error('Token not found in localStorage!');
       return of(); 
     }
-
+  
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
     });
-
-    return this.http.put<Car>(`${this.baseUrl}${id}/`, car, { headers });
+  
+    return this.http.put<Car>(`${this.baseUrl}/api/cars/${id}/`, car, { headers });
   }
+  
 
   deleteCar(id: number): Observable<void> {
     const token = localStorage.getItem('authToken');
@@ -76,7 +88,7 @@ console.log("cars serv")
     }
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     });
 
     return this.http.delete<void>(`${this.baseUrl}${id}/`, { headers });

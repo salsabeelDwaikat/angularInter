@@ -40,14 +40,19 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const url = 'https://fe44-213-6-46-155.ngrok-free.app/polls/api/login/'
-
+      const url = 'https://fe44-213-6-46-155.ngrok-free.app/polls/api/login/';
       const body = this.loginForm.value;
-
-      this.http.post(url, body).subscribe({
+  
+      this.http.post<{ token: string }>(url, body).subscribe({
         next: (res) => {
-          alert('Login successful!');
-          this.router.navigate(['/home']);
+          if (res.token) {
+            localStorage.setItem('authToken', res.token); 
+            alert('Login successful!');
+            this.router.navigate(['/home']);
+          } else {
+            console.error('Login succeeded, but no token in response:', res);
+            alert('Login failed: no token received.');
+          }
         },
         error: (err) => {
           console.error('Login error:', err);
@@ -58,7 +63,7 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
     }
   }
-
+  
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }

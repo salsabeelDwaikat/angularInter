@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill" style="width: 100%;">
+    <mat-select
+      [(ngModel)]="value"
+      (selectionChange)="onBlur()"
+      [disableOptionCentering]="true"
+      panelClass="ag-theme-alpine"
+      >
+      <mat-option *ngFor="let make of makes" [value]="make">
+        {{ make }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
